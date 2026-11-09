@@ -38,3 +38,9 @@ Nine native tests cover all 21,952 three-state graph/owner/goal combinations, 14
 ## Limits
 
 Finite total perfect-information turn-based recurrence, not safety or completion. No fairness assumption: an available environment action need never be taken. Not a deployed shield, learned abstraction, LLM guarantee, LTL compiler, stochastic/concurrent/generalized-Buchi solver, new algorithm or scalable benchmark. Original code/fixtures; standard game theory attributed.
+
+## Action-level failure lassos
+
+[Repeat the actual failure](https://midya8.github.io/buchilab/lassos.html) | [Witness contract, checks and source notes](LASSOS.md)
+
+For every failing fixed controller policy and root, inspect the exact prefix once and non-goal cycle forever, with owner and action provenance. A separate report/API/CLI preserves the base v1 contract. Empty prefixes, nonempty self-loops, multiedge cycles, unreachable bad components and duplicate-target action choices are explicit. BFS generation is independently checked with bounded simple walks plus the joint-policy lasso oracle. These are per-policy counterexamples, not a uniform spoiling strategy for the whole game. Sixteen native and five Node/Chrome tests preserve all original tests.

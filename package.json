@@ -1,1 +1,1 @@
-{"name":"buchilab","version":"0.1.0","private":true,"type":"module","scripts":{"test":"node --test tests/test_engine.mjs tests/test_browser.cjs"}}
+{"name": "buchilab", "version": "0.1.0", "private": true, "type": "module", "scripts": {"test": "node --test tests/test_engine.mjs tests/test_browser.cjs tests/test_witness.mjs tests/test_lasso_browser.cjs"}}
