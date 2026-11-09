@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Winning region is not a permissive policy",
+    "description": "Both idle and goal are winning states, but choosing wait forever loses recurrence. Inspect every controller policy, not only winning targets.",
+    "input": {
+      "states": [
+        {
+          "name": "idle",
+          "owner": "controller",
+          "goal": false,
+          "moves": [
+            {
+              "action": "wait",
+              "to": "idle"
+            },
+            {
+              "action": "visit",
+              "to": "goal"
+            }
+          ]
+        },
+        {
+          "name": "goal",
+          "owner": "controller",
+          "goal": true,
+          "moves": [
+            {
+              "action": "return",
+              "to": "idle"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Reach once is not recur forever",
+    "description": "The only route visits goal once, then remains at done forever. Even the initial goal state loses the repeated-goal objective.",
+    "input": {
+      "states": [
+        {
+          "name": "start",
+          "owner": "controller",
+          "goal": false,
+          "moves": [
+            {
+              "action": "visit",
+              "to": "goal"
+            }
+          ]
+        },
+        {
+          "name": "goal",
+          "owner": "controller",
+          "goal": true,
+          "moves": [
+            {
+              "action": "finish",
+              "to": "done"
+            }
+          ]
+        },
+        {
+          "name": "done",
+          "owner": "environment",
+          "goal": false,
+          "moves": [
+            {
+              "action": "stay",
+              "to": "done"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Environment can starve progress",
+    "description": "Goal is always available, but the environment can wait forever. No fairness assumption requires it to choose deliver.",
+    "input": {
+      "states": [
+        {
+          "name": "pending",
+          "owner": "environment",
+          "goal": false,
+          "moves": [
+            {
+              "action": "wait",
+              "to": "pending"
+            },
+            {
+              "action": "deliver",
+              "to": "goal"
+            }
+          ]
+        },
+        {
+          "name": "goal",
+          "owner": "controller",
+          "goal": true,
+          "moves": [
+            {
+              "action": "again",
+              "to": "pending"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Same graph, controller owns pending",
+    "description": "Only pending ownership changes. Now the controller can repeatedly choose deliver instead of waiting.",
+    "input": {
+      "states": [
+        {
+          "name": "pending",
+          "owner": "controller",
+          "goal": false,
+          "moves": [
+            {
+              "action": "wait",
+              "to": "pending"
+            },
+            {
+              "action": "deliver",
+              "to": "goal"
+            }
+          ]
+        },
+        {
+          "name": "goal",
+          "owner": "controller",
+          "goal": true,
+          "moves": [
+            {
+              "action": "again",
+              "to": "pending"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Six-state return cycle",
+    "description": "A forced five-edge trip reaches goal, then resets. Inner ranks decrease before each next goal; goal steps reset into the winning region.",
+    "input": {
+      "states": [
+        {
+          "name": "s0",
+          "owner": "controller",
+          "goal": false,
+          "moves": [
+            {
+              "action": "next",
+              "to": "s1"
+            }
+          ]
+        },
+        {
+          "name": "s1",
+          "owner": "environment",
+          "goal": false,
+          "moves": [
+            {
+              "action": "next",
+              "to": "s2"
+            }
+          ]
+        },
+        {
+          "name": "s2",
+          "owner": "controller",
+          "goal": false,
+          "moves": [
+            {
+              "action": "next",
+              "to": "s3"
+            }
+          ]
+        },
+        {
+          "name": "s3",
+          "owner": "environment",
+          "goal": false,
+          "moves": [
+            {
+              "action": "next",
+              "to": "s4"
+            }
+          ]
+        },
+        {
+          "name": "s4",
+          "owner": "controller",
+          "goal": false,
+          "moves": [
+            {
+              "action": "next",
+              "to": "s5"
+            }
+          ]
+        },
+        {
+          "name": "s5",
+          "owner": "environment",
+          "goal": true,
+          "moves": [
+            {
+              "action": "next",
+              "to": "s0"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Every state is a goal",
+    "description": "Any infinite path visits goals infinitely often. The full graph wins, including adversarial self-loops.",
+    "input": {
+      "states": [
+        {
+          "name": "a",
+          "owner": "environment",
+          "goal": true,
+          "moves": [
+            {
+              "action": "stay",
+              "to": "a"
+            },
+            {
+              "action": "cross",
+              "to": "b"
+            }
+          ]
+        },
+        {
+          "name": "b",
+          "owner": "environment",
+          "goal": true,
+          "moves": [
+            {
+              "action": "back",
+              "to": "a"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "No goals anywhere",
+    "description": "An infinite self-loop without a goal loses. The final inner fixed point is empty, but obligations are still shown.",
+    "input": {
+      "states": [
+        {
+          "name": "idle",
+          "owner": "controller",
+          "goal": false,
+          "moves": [
+            {
+              "action": "wait",
+              "to": "idle"
+            }
+          ]
+        }
+      ]
+    }
+  }
+]
