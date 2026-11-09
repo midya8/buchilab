@@ -18,7 +18,7 @@ def load(text):
     return json.loads(text, object_pairs_hook=pairs, parse_constant=lambda x: (_ for _ in ()).throw(ValueError('Nonfinite JSON')))
 
 
-def main():
+def main(generator=analyze,checker=verify,schema='buchilab-v1'):
     ap=argparse.ArgumentParser(description='Inspect finite total turn-based repeated-goal games')
     ap.add_argument('input',help='JSON path, or - for stdin');ap.add_argument('--verify',action='store_true');ap.add_argument('--output')
     args=ap.parse_args()
@@ -28,9 +28,9 @@ def main():
         if len(raw)>cap: raise ValueError('Input exceeds byte limit')
         data=load(raw.decode('utf-8'))
         if args.verify:
-            if not verify(data): raise ValueError('Invalid report')
-            output={'valid':True,'schema':'buchilab-v1'}
-        else: output=analyze(data)
+            if not checker(data): raise ValueError('Invalid report')
+            output={'valid':True,'schema':schema}
+        else: output=generator(data)
         text=json.dumps(output,indent=2,allow_nan=False)+'\n'
         if args.output:
             target=Path(args.output);tmp=None
