@@ -119,7 +119,7 @@ Counts describe this deterministic corpus, not all six-state games and not a for
 
 ## Actual external reference: Oink, pinned and executed
 
-Inspected and separately built Oink 1.1.0 source commit `db336a53e6a1b2dc12ab89b58d1871fe565d0147`, with Lace 2.6.0 commit `a091978dc4479fc3b9bc7af7dc77939ec8587c44`. Current Lace needs CMake 3.23 or newer; the optional script uses isolated CMake 3.31.10. The upstream README mentions Boost, but this pinned CMake build does not require it. We do not report a stale dependency as a blocker.
+Inspected and separately built Oink 1.1.0 source commit `db336a53e6a1b2dc12ab89b58d1871fe565d0147`, with Lace 2.6.0 commit `a091978dc4479fc3b9bc7af7dc77939ec8587c44`. Current Lace needs CMake 3.23 or newer; the optional script uses isolated CMake 3.31.10. The upstream README mentions Boost, but this pinned CMake build does not require it. We do not report a stale dependency as a blocker. The pinned bundled cxxopts header omits `<cstdint>` and failed on the newer hosted compiler. The build script explicitly preincludes this standard header with `-include cstdint`, without changing the pinned source trees or external checker. The original CI failure is retained; local and final CI results are reported separately.
 
 ```sh
 # Builds both pinned sources and runs the real reference, no vendored copy:
