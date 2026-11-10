@@ -18,8 +18,8 @@ def load(text):
     return json.loads(text, object_pairs_hook=pairs, parse_constant=lambda x: (_ for _ in ()).throw(ValueError('Nonfinite JSON')))
 
 
-def main(generator=analyze,checker=verify,schema='buchilab-v1'):
-    ap=argparse.ArgumentParser(description='Inspect finite total turn-based repeated-goal games')
+def main(generator=analyze,checker=verify,schema='buchilab-v1', description='Inspect finite total turn-based repeated-goal games'):
+    ap=argparse.ArgumentParser(description=description)
     ap.add_argument('input',help='JSON path, or - for stdin');ap.add_argument('--verify',action='store_true');ap.add_argument('--output')
     args=ap.parse_args()
     try:
