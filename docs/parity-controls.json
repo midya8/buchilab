@@ -1,0 +1,484 @@
+[
+  {
+    "id": "winning_region_bad_policy",
+    "title": "A region is not a policy",
+    "description": "Even wins both states, but its wait action loses on priority 1. Visiting 2 repeatedly wins.",
+    "input": {
+      "states": [
+        {
+          "name": "s0",
+          "owner": "even",
+          "priority": 1,
+          "moves": [
+            {
+              "action": "wait",
+              "to": "s0"
+            },
+            {
+              "action": "visit",
+              "to": "s1"
+            }
+          ]
+        },
+        {
+          "name": "s1",
+          "owner": "odd",
+          "priority": 2,
+          "moves": [
+            {
+              "action": "return",
+              "to": "s0"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "hidden_odd_subcycle",
+    "title": "An even maximum can hide a loss",
+    "description": "Odd can stay forever at 1 inside the SCC whose maximum is 2. Checking only maximal SCC maxima would miss it.",
+    "input": {
+      "states": [
+        {
+          "name": "s0",
+          "owner": "odd",
+          "priority": 1,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s0"
+            },
+            {
+              "action": "a1",
+              "to": "s1"
+            }
+          ]
+        },
+        {
+          "name": "s1",
+          "owner": "even",
+          "priority": 2,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s0"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "transient_high",
+    "title": "A high prefix does not recur",
+    "description": "Priority 7 is seen only once before an even 0 self-loop. Only the eventual recurring part matters.",
+    "input": {
+      "states": [
+        {
+          "name": "s0",
+          "owner": "odd",
+          "priority": 7,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s1"
+            }
+          ]
+        },
+        {
+          "name": "s1",
+          "owner": "even",
+          "priority": 0,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s1"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "odd_overrides",
+    "title": "The recurring maximum wins",
+    "description": "Priorities 2 and 3 alternate forever. Recurring 3 makes Odd win despite the repeated even 2.",
+    "input": {
+      "states": [
+        {
+          "name": "s0",
+          "owner": "even",
+          "priority": 2,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s1"
+            }
+          ]
+        },
+        {
+          "name": "s1",
+          "owner": "odd",
+          "priority": 3,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s0"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "owner_flip",
+    "title": "The same graph, another owner",
+    "description": "Even now controls whether to stay at 1 or visit 2. The graph is unchanged from the hidden-subcycle control.",
+    "input": {
+      "states": [
+        {
+          "name": "s0",
+          "owner": "even",
+          "priority": 1,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s0"
+            },
+            {
+              "action": "a1",
+              "to": "s1"
+            }
+          ]
+        },
+        {
+          "name": "s1",
+          "owner": "even",
+          "priority": 2,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s0"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "zero_even",
+    "title": "Zero is even",
+    "description": "A priority 0 self-loop is an Even win, even if Odd owns its forced move.",
+    "input": {
+      "states": [
+        {
+          "name": "s0",
+          "owner": "odd",
+          "priority": 0,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s0"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "all_odd",
+    "title": "Every priority is odd",
+    "description": "Every play has an odd recurring maximum. Ownership does not change the outcome.",
+    "input": {
+      "states": [
+        {
+          "name": "s0",
+          "owner": "even",
+          "priority": 1,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s0"
+            },
+            {
+              "action": "a1",
+              "to": "s1"
+            }
+          ]
+        },
+        {
+          "name": "s1",
+          "owner": "odd",
+          "priority": 3,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s2"
+            }
+          ]
+        },
+        {
+          "name": "s2",
+          "owner": "even",
+          "priority": 7,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s0"
+            },
+            {
+              "action": "a1",
+              "to": "s2"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "disconnected",
+    "title": "Two separate dominions",
+    "description": "Even 0 and Odd 1 self-loops form separate regions. A high-priority prefix can reach either.",
+    "input": {
+      "states": [
+        {
+          "name": "s0",
+          "owner": "even",
+          "priority": 0,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s0"
+            }
+          ]
+        },
+        {
+          "name": "s1",
+          "owner": "odd",
+          "priority": 1,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s1"
+            }
+          ]
+        },
+        {
+          "name": "s2",
+          "owner": "even",
+          "priority": 6,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s0"
+            },
+            {
+              "action": "a1",
+              "to": "s1"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "parallel_actions",
+    "title": "Same destination, different actions",
+    "description": "Parallel named choices stay separate in complete policies even when their induced paths agree.",
+    "input": {
+      "states": [
+        {
+          "name": "s0",
+          "owner": "even",
+          "priority": 2,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s0"
+            },
+            {
+              "action": "a1",
+              "to": "s0"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "priority_gaps",
+    "title": "Gaps are not compressed by parity alone",
+    "description": "Recurring 1 and 6 make an Even win. Dropping priorities or reindexing without preserving parity/order is not this game.",
+    "input": {
+      "states": [
+        {
+          "name": "s0",
+          "owner": "odd",
+          "priority": 1,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s1"
+            }
+          ]
+        },
+        {
+          "name": "s1",
+          "owner": "even",
+          "priority": 6,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s0"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "six_state_boundary",
+    "title": "Six-state boundary",
+    "description": "A forced six-state cycle has maximum 7. The prefix starts at each selected root.",
+    "input": {
+      "states": [
+        {
+          "name": "s0",
+          "owner": "even",
+          "priority": 0,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s1"
+            }
+          ]
+        },
+        {
+          "name": "s1",
+          "owner": "odd",
+          "priority": 2,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s2"
+            }
+          ]
+        },
+        {
+          "name": "s2",
+          "owner": "even",
+          "priority": 1,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s3"
+            }
+          ]
+        },
+        {
+          "name": "s3",
+          "owner": "odd",
+          "priority": 4,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s4"
+            }
+          ]
+        },
+        {
+          "name": "s4",
+          "owner": "even",
+          "priority": 7,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s5"
+            }
+          ]
+        },
+        {
+          "name": "s5",
+          "owner": "odd",
+          "priority": 6,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s0"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "second_recursion",
+    "title": "An opponent dominion changes the answer",
+    "description": "The first remainder gives the other player a nonempty dominion. A second attractor and recursive call are necessary.",
+    "input": {
+      "states": [
+        {
+          "name": "s0",
+          "owner": "even",
+          "priority": 4,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s0"
+            },
+            {
+              "action": "a1",
+              "to": "s2"
+            }
+          ]
+        },
+        {
+          "name": "s1",
+          "owner": "odd",
+          "priority": 1,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s3"
+            },
+            {
+              "action": "a1",
+              "to": "s2"
+            }
+          ]
+        },
+        {
+          "name": "s2",
+          "owner": "odd",
+          "priority": 5,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s2"
+            },
+            {
+              "action": "a1",
+              "to": "s3"
+            }
+          ]
+        },
+        {
+          "name": "s3",
+          "owner": "even",
+          "priority": 5,
+          "moves": [
+            {
+              "action": "a0",
+              "to": "s3"
+            },
+            {
+              "action": "a1",
+              "to": "s0"
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

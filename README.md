@@ -44,3 +44,12 @@ Finite total perfect-information turn-based recurrence, not safety or completion
 [Repeat the actual failure](https://midya8.github.io/buchilab/lassos.html) | [Witness contract, checks and source notes](LASSOS.md)
 
 For every failing fixed controller policy and root, inspect the exact prefix once and non-goal cycle forever, with owner and action provenance. A separate report/API/CLI preserves the base v1 contract. Empty prefixes, nonempty self-loops, multiedge cycles, unreachable bad components and duplicate-target action choices are explicit. BFS generation is independently checked with bounded simple walks plus the joint-policy lasso oracle. These are per-policy counterexamples, not a uniform spoiling strategy for the whole game. Sixteen native and five Node/Chrome tests preserve all original tests.
+
+
+## Max-parity games: the maximum that keeps returning
+
+[Parity inspector](https://midya8.github.io/buchilab/parity.html) | [Exact contract, derivation and inspected sources](PARITY.md)
+
+Separate six-state/two-move max-recurring-priority games, preserving every old goal and lasso workflow. Inspect classic Zielonka recursion, every synchronous attractor test, both players' complete policies, threshold-induced losing-cycle SCCs and every joint-policy/root lasso. A winning region does not certify a policy; a maximal SCC with an even maximum can still hide an odd self-loop. Prefix priorities do not decide a recurring winner.
+
+Separate bitmask/Tarjan, set/Floyd/policy-pair and browser BFS implementations agree on660 complete reports. Actual pinned Oink runs three solver families with preprocessing disabled,1,980 solver runs and660 separately verified native canonical strategy certificates. Twelve original controls, strict atomic `buchilab-parity` / `python -m buchilab.parity_cli`, actual Chrome trusted-download tests and fresh-wheel origin checks. No new theory, scale, fairness or real-agent guarantee. Full counts and caveats in [PARITY.md](PARITY.md).

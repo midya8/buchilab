@@ -1,1 +1,9 @@
-{"name": "buchilab", "version": "0.1.0", "private": true, "type": "module", "scripts": {"test": "node --test tests/test_engine.mjs tests/test_browser.cjs tests/test_witness.mjs tests/test_lasso_browser.cjs"}}
+{
+  "name": "buchilab",
+  "version": "0.3.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test --test-concurrency=1 tests/test_*.mjs tests/test_*.cjs"
+  }
+}

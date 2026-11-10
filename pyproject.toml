@@ -3,11 +3,12 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 [project]
 name = "buchilab"
-version = "0.1.0"
+version = "0.3.0"
 description = "Inspect exact finite turn-based repeated-goal games and every strategy obligation"
 requires-python = ">=3.10"
 license = {text = "MIT"}
 [project.scripts]
 buchilab = "buchilab.__main__:main"
+buchilab-parity = "buchilab.parity_cli:main"
 [tool.setuptools]
 packages = ["buchilab"]
