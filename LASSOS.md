@@ -1,4 +1,8 @@
-# Action-level failing-policy lasso certificates
+# BuchiLab: replay a failing policy
+
+A lasso gives a finite prefix to follow once and a nonempty cycle to repeat
+forever. This mode shows a concrete failure for each losing fixed-policy/root
+pair. It does not replace the original repeated-goal report.
 
 [Live inspector](https://midya8.github.io/buchilab/lassos.html) | [Base fixed-point method and seven-source ledger](METHOD.md)
 
@@ -31,9 +35,9 @@ JavaScript independently builds the base game report with its set/graph-closure 
 
 Ten browser controls preserve all seven base controls and add: input-order anchor with a two-edge cycle and action ties versus a shorter later self-loop; an unreachable bad cycle beside a winning all-goal root; and duplicate-target controller actions that remain distinct policies/witnesses.
 
-Seven new native tests preserve the original nine, for 16 total tests passing Python 3.10-3.13. New coverage includes all 21,952 three-state graph/owner/goal combinations, 120 seeded larger cases, the 729-policy duplicate-target maximum, nonempty self-loop cycles, empty prefixes, goals on the finite prefix, null winning witnesses, owner/action tie order, a multiedge cycle, unreachable bad components, independent checker with solver patched out, every report-family forgery, exact primitive types, immutability and strict atomic CLI rejection.
+At the lasso release, seven added native tests preserved the original nine, for 16 total tests passing Python 3.10-3.13. All remain in the current 31-test suite. New coverage includes all 21,952 three-state graph/owner/goal combinations, 120 seeded larger cases, the 729-policy duplicate-target maximum, nonempty self-loop cycles, empty prefixes, goals on the finite prefix, null winning witnesses, owner/action tie order, a multiedge cycle, unreachable bad components, independent checker with solver patched out, every report-family forgery, exact primitive types, immutability and strict atomic CLI rejection.
 
-Two new Node/actual-Chrome tests preserve the original three, for five total. Witness Python/JavaScript comparison covers 314 complete reports, 1,023 policies, 4,189 roots, 1,713 failing-policy witnesses, 1,449 prefix edges and 2,114 cycle edges. All two-state distinct-target games plus ownership and goals are included, alongside ten controls and 160 seeded cases. Counts are descriptive test coverage, not speed or superiority claims.
+The lasso release added two Node/actual-Chrome tests to the original three, for five total. All remain in the current nine-test suite. Witness Python/JavaScript comparison covers 314 complete reports, 1,023 policies, 4,189 roots, 1,713 failing-policy witnesses, 1,449 prefix edges and 2,114 cycle edges. All two-state distinct-target games plus ownership and goals are included, alongside ten controls and 160 seeded cases. Counts are descriptive test coverage, not speed or superiority claims.
 
 At 320/390/1280 the new actual-Chrome test visits every record in all ten controls: 13 policies, 17 controller choices, 32 roots, 19 witnesses, ten prefix edges and 22 cycle edges. It checks exact owners/actions/endpoints and text, null/empty states, full JSON/export, invalid-input clearing and horizontal overflow. Installed-wheel reproduction preserves seven base reports/two CLI entry points and adds ten witness reports through the witness module CLI, generation and verification outside checkout; five installed module origins are checked.
 
