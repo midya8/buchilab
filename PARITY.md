@@ -1,8 +1,8 @@
 # BuchiLab 0.3: the maximum that keeps returning
 
-A bounded, fully visible finite max-parity game inspector. This is established parity-game theory with original code, controls and transparent evidence, not a new algorithm or a scalable solver. The old repeated-goal API, v1 schema and action-lasso workflow remain separate.
+Inspect small finite games where the highest priority recurring forever decides the winner. The page shows recursive region solving, complete policies and each policy pair's eventual cycle. It implements established parity-game theory, not a new or scalable solver. The original repeated-goal API, v1 schema and action-lasso workflow remain separate.
 
-## The failure, before the algorithm
+## A winning region can contain a losing policy
 
 The default has two states. Even owns `s0` with priority 1 and can `wait` at `s0` or `visit` `s1`. Odd owns `s1` with priority 2 and has the forced `return` to `s0`. Even wins from both states by repeatedly visiting 2. But the complete policy choosing wait loses from both roots: eventually only 1 recurs. A winning region does not make every region-preserving policy winning.
 
@@ -119,7 +119,7 @@ Counts describe this deterministic corpus, not all six-state games and not a for
 
 ## Actual external reference: Oink, pinned and executed
 
-Inspected and separately built Oink 1.1.0 source commit `db336a53e6a1b2dc12ab89b58d1871fe565d0147`, with Lace 2.6.0 commit `a091978dc4479fc3b9bc7af7dc77939ec8587c44`. Current Lace needs CMake 3.23 or newer; the optional script uses isolated CMake 3.31.10. The upstream README mentions Boost, but this pinned CMake build does not require it. We do not report a stale dependency as a blocker. The pinned bundled cxxopts header omits `<cstdint>` and failed on the newer hosted compiler. The build script explicitly preincludes this standard header with `-include cstdint`, without changing the pinned source trees or external checker. The original CI failure is retained; local and final CI results are reported separately.
+Inspected and separately built Oink 1.1.0 source commit `db336a53e6a1b2dc12ab89b58d1871fe565d0147`, with Lace 2.6.0 commit `a091978dc4479fc3b9bc7af7dc77939ec8587c44`. Current Lace needs CMake 3.23 or newer; the optional script uses isolated CMake 3.31.10. The upstream README mentions Boost, but this pinned CMake build does not require it. The pinned bundled cxxopts header omits `<cstdint>` and failed on the newer hosted compiler. The build script explicitly preincludes this standard header with `-include cstdint`, without changing the pinned source trees or external checker. The original CI failure is retained; local and final CI results are reported separately.
 
 ```sh
 # Builds both pinned sources and runs the real reference, no vendored copy:
