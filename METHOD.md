@@ -1,4 +1,8 @@
-# Repeated-goal games with every fixed-point and policy obligation
+# BuchiLab: repeated-goal semantics
+
+These notes define the original repeated-goal mode and its positional-policy
+audit. [LASSOS.md](LASSOS.md) describes action-level counterexamples;
+[PARITY.md](PARITY.md) defines the separate max-recurring-priority objective.
 
 ## Exact model
 
@@ -36,9 +40,9 @@ The checker never calls the generator; it shares only input validation. It check
 
 ## Reproduction evidence
 
-Nine native tests pass Python 3.10-3.13. They include all 21,952 three-state total distinct-target directed graphs with every ownership and goal subset, 140 seeded one-to-six-state games, the maximum 729-policy/duplicate-target case, original owner-flip/once-versus-recurrence controls, every report-family forgery, strict types, checker with solver disabled, input immutability, ordering, dead-end/schema rejection and strict atomic CLI failure cases.
+The original nine native tests pass Python 3.10-3.13 and remain in the current suite. They include all 21,952 three-state total distinct-target directed graphs with every ownership and goal subset, 140 seeded one-to-six-state games, the maximum 729-policy/duplicate-target case, original owner-flip/once-versus-recurrence controls, every report-family forgery, strict types, checker with solver disabled, input immutability, ordering, dead-end/schema rejection and strict atomic CLI failure cases.
 
-Three Node/actual-Chrome tests pass. Python and JavaScript match 331 complete reports: 564 outer iterations, 1,084 inner updates, 3,482 state obligations, 1,048 complete controller policies, 4,132 policy-root verdicts, 5,339 retained edges and 765 cyclic components. Browser checks all seven controls, every displayed record and JSON/export/invalid-input clearing/overflow at 320/390/1280. Controls contain 12 outer iterations, 26 inner updates, 83 obligations, 95 round moves, 18 state verdicts, 22 state moves, nine policies, 15 choices, 24 retained edges, five components and 22 policy-root verdicts. Installed-wheel replay checks seven controls through both CLI entry points outside checkout and four installed module origins.
+The original three Node/actual-Chrome tests remain in the current suite. Python and JavaScript match 331 complete reports: 564 outer iterations, 1,084 inner updates, 3,482 state obligations, 1,048 complete controller policies, 4,132 policy-root verdicts, 5,339 retained edges and 765 cyclic components. Browser checks all seven controls, every displayed record and JSON/export/invalid-input clearing/overflow at 320/390/1280. Controls contain 12 outer iterations, 26 inner updates, 83 obligations, 95 round moves, 18 state verdicts, 22 state moves, nine policies, 15 choices, 24 retained edges, five components and 22 policy-root verdicts. Installed-wheel replay checks seven controls through both CLI entry points outside checkout and four installed module origins.
 
 Report schema is `buchilab-v1`. Native input limit 64 KiB; verification-report limit 8 MiB. Duplicate keys and nonfinite constants are rejected. Invalid input does not replace an existing output; writes use atomic replacement. Browser JSON.parse uses normal last-key-wins parsing before bounded validation, unlike the native duplicate-key rejection. Editable inputs stay local; static page assets and controls are loaded, but no user-entered graph is sent to a service.
 
